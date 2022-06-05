@@ -1,0 +1,44 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        version: [0.7.7]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup stacc
+        uses: ./
+        with:
+          version: ${{ matrix.version }}
+
+      - name: Capture stacc version installed
+        run: |
+          export STACC_VERSION=$( stacc --version )
+          echo 'STACC_VERSION_INSTALLED<<EOF' >> $GITHUB_ENV
+          stacc --version >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+      - name: Verify
+        shell: python
+        env:
+          STACC_VERSION_EXPECTED: ${{ matrix.version }}
+        run: |
+          import sys, os
+          sys.exit(
+              int(not os.environ["STACC_VERSION_EXPECTED"] in os.environ["STACC_VERSION_INSTALLED"])
+          )
