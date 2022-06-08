@@ -40,7 +40,7 @@ To authenticate with the `stacc` CLI, you must provide the following environment
 - `CLIENT_ID`: Client ID
 - `CLIENT_SECRET`: Client secret
 
-Example job:
+## Example job
 
 ```yaml
 jobs:
@@ -55,6 +55,9 @@ jobs:
       - name: stacc login
         run: |
           stacc login -u "$CLIENT_ID" -p "$CLIENT_SECRET"
+      - name: stacc publish
+        run: |
+          stacc publish . --version "1.2.3"
 ```
 
 ## License
