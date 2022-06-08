@@ -33,6 +33,30 @@ The actions supports the following inputs:
 
 - `version`: The version of `stacc` to install, defaulting to `0.7.8`
 
+## Authentication
+
+To authenticate with the `stacc` CLI, you must provide the following environment variables:
+
+- `CLIENT_ID`: Client ID
+- `CLIENT_SECRET`: Client secret
+
+Example job:
+
+```yaml
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    env:
+      CLIENT_ID: ${{ secrets.MY_CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.MY_CLIENT_SECRET }}
+    steps:
+      - name: Setup stacc
+        uses: stacc/setup-stacc-cli@v1
+      - name: stacc login
+        run: |
+          stacc login -u "$CLIENT_ID" -p "$CLIENT_SECRET"
+```
+
 ## License
 
 [MIT](LICENSE).
