@@ -31,7 +31,7 @@ steps:
 
 The actions supports the following inputs:
 
-- `version`: The version of `stacc` to install, defaulting to `0.7.7`
+- `version`: The version of `stacc` to install, defaulting to `0.7.8`
 
 ## License
 
