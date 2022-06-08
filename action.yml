@@ -2,9 +2,9 @@ name: setup-stacc-cli
 description: Install the stacc CLI on Github Actions runners
 inputs:
   version:
-    description: "Version of stacc CLI"
+    description: Version of stacc CLI
     required: false
     default: 0.7.8
 runs:
-  using: "node16"
-  main: "src/index.js"
+  using: node12
+  main: dist/index.js
